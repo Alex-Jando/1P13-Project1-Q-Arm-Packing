@@ -2,14 +2,11 @@ import sys
 from lookup_products import lookup_products
 from pack_products import pack_products
 from authenticate import authenticate
+from complete_order import complete_order
 
 
 def scan_barcode() -> str:
-    return ""
-
-
-def complete_order(userid: str):
-    pass
+    return "Sponge D12 Bottle"
 
 
 def customer_summary(userid: str):
@@ -35,7 +32,7 @@ def main():
         pack_products(products)
 
         # Output a summary of the current order
-        complete_order(userid)
+        complete_order(userid, products)
 
         # Check if the user wishes to continue
         while (
