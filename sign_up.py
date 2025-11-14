@@ -83,14 +83,11 @@ def sign_up():
     # Open the USER_FILE database, and append the new user account information to it
     with open(USER_FILE, "a") as f:
         # Hash the password before adding it to the file
-        f.write(
-            f"{new_userid},{
-                bcrypt.hashpw(
-                    new_password.encode(),
-                    bcrypt.gensalt(),
-                ).decode()
-            }\n"
-        )
+        new_password_hash = bcrypt.hashpw(
+            new_password.encode(),
+            bcrypt.gensalt(),
+        ).decode()
+        f.write(f"{new_userid},{new_password_hash}\n")
 
     # Let the user know their new account has been created successfully
 

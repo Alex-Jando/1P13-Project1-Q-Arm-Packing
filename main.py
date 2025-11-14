@@ -1,12 +1,12 @@
 import sys
+from Common.qarm_interface_wrapper import QArmInterface, BarcodeScanner
 from lookup_products import lookup_products
 from pack_products import pack_products
 from authenticate import authenticate
 from complete_order import complete_order
 
-
-def scan_barcode() -> str:
-    return "Sponge D12 Bottle"
+GRIPPER_IMPLEMENTATION = 1
+scan_barcode = BarcodeScanner.scan_barcode
 
 
 def customer_summary(userid: str):
@@ -55,9 +55,12 @@ def main():
 
 
 if __name__ == "__main__":
+    arm = QArmInterface(GRIPPER_IMPLEMENTATION)
     try:
         main()
     except KeyboardInterrupt:
         print("Keyboard Interupt Detected...")
         print("Exiting the program!")
+    finally:
+        arm.end_arm_connection()
         sys.exit()
