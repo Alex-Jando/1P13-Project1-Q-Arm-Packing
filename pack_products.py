@@ -1,3 +1,62 @@
+from Common.qarm_interface_wrapper import QArmInterface
+from time import sleep
+
+GRIPPER_IMPLEMENTATION = 1
+arm = QArmInterface(GRIPPER_IMPLEMENTATION)
+
+
+def drop(gripper_extension: float):
+    sleep(1)
+    arm.home()
+    sleep(1)
+    arm.rotate_base(-55)
+    sleep(1)
+    arm.rotate_elbow(25)
+    sleep(1)
+    arm.rotate_gripper(gripper_extension)
+    sleep(1)
+    arm.home()
+    sleep(1)
+
+
+def sponge():
+    sleep(1)
+    arm.home()
+    sleep(1)
+    arm.rotate_base(17)
+    sleep(1)
+    arm.rotate_shoulder(40)
+    sleep(1)
+    arm.rotate_elbow(-7)
+    sleep(1)
+    arm.rotate_gripper(-600)
+    sleep(1)
+    arm.rotate_shoulder(-30)
+    sleep(1)
+    arm.home()
+    sleep(1)
+    drop(600)
+
+
+def bottle():
+    sleep(1)
+    arm.home()
+    sleep(1)
+    arm.rotate_base(11)
+    sleep(1)
+    arm.rotate_shoulder(41)
+    sleep(1)
+    arm.rotate_elbow(-7)
+    sleep(1)
+    arm.rotate_gripper(-600)
+    sleep(1)
+    arm.rotate_shoulder(-30)
+    sleep(1)
+    arm.home()
+    sleep(1)
+    drop(600)
+
+
 def pack_products(products: list[list[str | float]]):
     for product in products:
         name = product[0]
@@ -5,12 +64,12 @@ def pack_products(products: list[list[str | float]]):
         if name == "Sponge":
             # Do Q-Arm movement to grab sponge item
 
-            pass
+            sponge()
 
         elif name == "Bottle":
             # Do Q-Arm movement to grab bottle item
 
-            pass
+            bottle()
 
         elif name == "Rook":
             # Do Q-Arm movement to grab rook item

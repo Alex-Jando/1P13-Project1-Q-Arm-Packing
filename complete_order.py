@@ -23,7 +23,7 @@ def complete_order(userid: str, products: list[list[str | float]]):
             # Add formatted receipt row to receipt
             receipt += f"|{product[0]:<20}{('$' + str(round(product[1], 2))):>10}\t|\n"  # type: ignore
             # Add formatted string to file_data
-            file_data += f",{product}"
+            file_data += f",{product[0]}"
             # Add price
             total_price += round(product[1], 2)  # type: ignore
         # Calculate discount, tax, and final price

@@ -1,11 +1,10 @@
 import sys
-from Common.qarm_interface_wrapper import QArmInterface, BarcodeScanner
+from Common.qarm_interface_wrapper import BarcodeScanner
 from lookup_products import lookup_products
-from pack_products import pack_products
+from pack_products import pack_products, arm
 from authenticate import authenticate
 from complete_order import complete_order
 
-GRIPPER_IMPLEMENTATION = 1
 scan_barcode = BarcodeScanner.scan_barcode
 
 
@@ -55,7 +54,6 @@ def main():
 
 
 if __name__ == "__main__":
-    arm = QArmInterface(GRIPPER_IMPLEMENTATION)
     try:
         main()
     except KeyboardInterrupt:
