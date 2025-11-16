@@ -1,6 +1,6 @@
+from sign_up import sign_up
 import os
 import bcrypt
-import sign_up
 import getpass
 
 USER_FILE = "users.csv"
@@ -27,7 +27,7 @@ def authenticate() -> str:
 
     # If the user doesn't have an account, then sign them up for one
     if account_exists == "n":
-        sign_up.sign_up()
+        sign_up()
 
     while True:
         # Get the userid and password
@@ -49,6 +49,7 @@ def authenticate() -> str:
                 # Check if the attempted password is valid for the userid
                 if bcrypt.checkpw(attempt_password.encode(), password_hash.encode()):
                     # If it is then the user should be logged in with this userid
+                    print(f"Successfully Logged In as userid: {userid}!")
                     return userid
                 # Otherwise tell the user their password is incorrect
                 print("Incorrect password!")
