@@ -52,12 +52,17 @@ def main():
     customer_summary(userid)
 
 
+# Common check to only run the full program if the main file is run directly
 if __name__ == "__main__":
     try:
+        # Run the main function
         main()
     except KeyboardInterrupt:
+        # If ctrl+c is pressed at any point exit the program
         print("Keyboard Interupt Detected...")
         print("Exiting the program!")
     finally:
+        # Disconnect the Q-Arm
         arm.end_arm_connection()
+        # Exit the program
         sys.exit()
