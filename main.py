@@ -4,15 +4,14 @@ from lookup_products import lookup_products
 from pack_products import pack_products, arm
 from authenticate import authenticate
 from complete_order import complete_order
+from customer_summary import customer_summary
 
 scan_barcode = BarcodeScanner.scan_barcode
 
 
-def customer_summary(userid: str):
-    pass
-
-
 def main():
+    """Main function for Q-Arm packing software"""
+
     # Welcome the user
     print("Welcome to the Q-Arm packing software...")
 

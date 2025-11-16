@@ -6,50 +6,62 @@ TAX = 0.13
 
 
 def complete_order(userid: str, products: list[list[str | float]]):
+    """Prints a order summary and records the current order the orders database
+
+    Args:
+        userid (str): The userid which placed the order
+        products (list[list[str  |  float]]): A list of the products that were made in the order and their prices
+    """
+
     # Create the ORDERS_FILE database if it doesn't already exist
     if not os.path.exists(ORDERS_FILE):
         with open(ORDERS_FILE, "w"):
             pass
 
+    # Sum up the prices of each product
+    sub_total = sum([price for _, price in products])  # type: ignore
+    # random.uniform generates a random number between 0.05 and 0.5 with equal probabilities for every value
+    discount_total = sub_total * random.uniform(0.05, 0.5)
+    # Calculate the tax amout
+    tax_total = (sub_total - discount_total) * TAX
+    # Calculate the final price to be paid
+    final_total = sub_total - discount_total + tax_total
+
+    # Save the data to the orders database
     with open(ORDERS_FILE, "a") as f:
-        # create empty cumulative variables
-        total_price = 0
-        file_data = ""
-        users = []
-        order_count = 0
-        receipt = f"{'=' * 33}\n{('Order Summary'):^33}\n{'_' * 33}\n"
+        f.write(
+            f"{userid},{final_total:.2f},{','.join([product for product, _ in products])}\n"  # type: ignore
+        )
 
-        for product in products:
-            # Add formatted receipt row to receipt
-            receipt += f"|{product[0]:<20}{('$' + str(round(product[1], 2))):>10}\t|\n"  # type: ignore
-            # Add formatted string to file_data
-            file_data += f",{product[0]}"
-            # Add price
-            total_price += round(product[1], 2)  # type: ignore
-        # Calculate discount, tax, and final price
-        discount_percent = random.uniform(0.05, 0.5)
-        discount_amount = round(total_price * discount_percent, 2)
-        tax_amount = round((total_price - discount_amount) * (TAX), 2)
-        final_price = round((total_price - discount_amount + tax_amount), 2)
+    # Declare an empty counter to record the number of orders by this userid
+    order_count = 0
 
-        # add final receipt lines to receipt
-        receipt += f"{'=' * 33}\nSubtotal:   \t\t${total_price:>6}\n"
-        receipt += f"Discount:   \t\t${(discount_amount):>6}\n"
-        receipt += f"Tax:        \t\t${(tax_amount):>6}\n"
-        receipt += f"Final Price:\t\t${final_price:>6}\n"
-        # add userid and final price to file_data
-        file_data = f"{userid},{final_price}" + file_data + "\n"
-
-        # write to orders.csv and close
-        f.write(file_data)
-
+    # Loop over the orders database
     with open(ORDERS_FILE, "r") as f:
-        # read open orders.csv to read
         for line in f.readlines():
-            users.append(line.split(",")[0])
+            # Seperate the userid
+            line_userid, *_ = line.strip().split(",")
+            # Check whether the order on this line belongs to the current userid
+            if line_userid == userid:
+                # If it does then increment the order_count
+                order_count += 1
 
-        order_count = users.count(userid)
-
-        # add final message to receipt and print
-        receipt += f"\nYou've made {order_count} order{'s' if order_count > 1 else ''}!\nThank you for your purchase!"
-        print(receipt)
+    # Print out a final recipet with all the information relevant to the order
+    print("=" * 30)
+    print(f"{'Order Summary':^30}")
+    print("=" * 30)
+    print(f"{'Product'}{'Price':>23}")
+    print("-" * 30)
+    for product, price in products:
+        print(f"{product:20}${f'{price:.2f}':>9}")
+    print("=" * 30)
+    print(f"{'Subtotal:':20}${f'{sub_total:.2f}':>9}")
+    print(f"{'Discount:':20}${f'{discount_total:.2f}':>9}")
+    print(f"{'Tax:':20}${f'{tax_total:.2f}':>9}")
+    print(f"{'Final Price:':20}${f'{final_total:.2f}':>9}")
+    print("=" * 30)
+    print(
+        f"{f"You've made {order_count} order{'s' if order_count != 1 else ''} so far.":^30}"
+    )
+    print(f"{'Thank you for your purchase!':^30}")
+    print("=" * 30)

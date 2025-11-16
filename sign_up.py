@@ -41,7 +41,17 @@ def sign_up():
 
     while True:
         # Get a new userid
+        print("Userids must meet the following criteria:")
+        print("1. Must be unique (can't already exist)")
+        print("2. Can only contain letters and numbers")
+        print("3. Can't contain any spaces")
         new_userid = input("Enter your new userid: ").strip()
+
+        # Check if the entered userid meets contains only alphanumeric characters
+        if not new_userid.isalpha():
+            print("Your new userid contains non-alphanumeric characters!")
+            continue
+
         # Open the UESR_FILE database
         with open(USER_FILE, "r") as f:
             for line in f.readlines():

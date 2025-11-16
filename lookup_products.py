@@ -1,3 +1,6 @@
+PRODUCTS_FILE = "products.csv"
+
+
 def lookup_products(barcode: str) -> list[list[str | float]]:
     """Looks up product pricing info from the products.csv file
 
@@ -17,7 +20,7 @@ def lookup_products(barcode: str) -> list[list[str | float]]:
     # For each product
     for product in products:
         # Try to find product in products database
-        with open("products.csv", "r") as f:
+        with open(PRODUCTS_FILE, "r") as f:
             # Read through database
             for line in f.readlines():
                 # Get the product from each line
@@ -26,7 +29,7 @@ def lookup_products(barcode: str) -> list[list[str | float]]:
 
                     # If the line is blank there will be an unpacking error
                 except ValueError:
-                    pass
+                    continue
 
                 # If product name matches
                 if name == product:
@@ -37,4 +40,5 @@ def lookup_products(barcode: str) -> list[list[str | float]]:
             else:
                 # Error Message since product not found
                 print(f'ERROR: Product "{product}" not found in products database!')
+
     return products_list

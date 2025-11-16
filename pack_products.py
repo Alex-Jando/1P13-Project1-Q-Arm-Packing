@@ -58,6 +58,12 @@ def bottle():
 
 
 def pack_products(products: list[list[str | float]]):
+    """Controls the Q-Arm to pickup the products
+
+    Args:
+        products (list[list[str  |  float]]): A list of the products to be packed
+    """
+
     for product in products:
         name = product[0]
         # have a function for each product movement
