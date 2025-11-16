@@ -4,6 +4,7 @@ import getpass
 import string
 
 USER_FILE = "users.csv"
+VALID_SYMBOLS = "!.@#$%^&*()_[]"
 
 
 def valid_password(password: str) -> bool:
@@ -19,13 +20,27 @@ def valid_password(password: str) -> bool:
     # If the password is less than 6 characters it's invalid
     if len(password) < 6:
         return False
-    # Check if the password contains any of the symbols
-    for s in string.punctuation:
-        if s in password:
-            # If it contains a symbol then it is valid
-            return True
-    # If it doesn't contain punctuation then it is invalid
-    return False
+
+    # Declare variables to store the state of password validity
+    no_lowercase = True
+    no_uppercase = True
+    no_number = True
+    no_symbol = True
+
+    # Loop over the character of the password
+    for char in password:
+        # If the character contains any of these field then add it
+        if char in string.ascii_lowercase:
+            no_lowercase = False
+        if char in string.ascii_uppercase:
+            no_uppercase = False
+        if char in string.digits:
+            no_number = False
+        if char in VALID_SYMBOLS:
+            no_symbol = False
+
+    # If any of the criteria are still missing then return False, otherwise True
+    return not any([no_lowercase, no_uppercase, no_number, no_symbol])
 
 
 def sign_up():
@@ -73,7 +88,10 @@ def sign_up():
         # Inform the user of the password criteria
         print("For security, all passwords must meet the following criteria:")
         print("1. 6 or more characters")
-        print(f"2. At least one of the following symbols: {string.punctuation}")
+        print(f"2. At least one of the following symbols: {VALID_SYMBOLS}")
+        print("3. At least one lowercase letter")
+        print("4. At least one uppercase letter")
+        print("5. At least one number")
         # Prompt the user to create a new password and confirm it
         new_password = getpass.getpass("Enter your new password: ").strip()
         new_password_confirm = getpass.getpass("Confirm your new password: ").strip()
