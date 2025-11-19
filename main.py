@@ -1,5 +1,7 @@
 import sys
 
+sys.path.append("../")
+
 # Package used to manage environment variables
 from dotenv import load_dotenv
 

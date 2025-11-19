@@ -62,7 +62,7 @@ def complete_order(userid: str, products: list[list[str | float]]):
     print(f"{'Final Price:':20}${f'{final_total:.2f}':>9}")
     print("=" * 30)
     print(
-        f"{f"You've made {order_count} order{'s' if order_count != 1 else ''} so far.":^30}"
+        f"""{f"You've made {order_count} order{'s' if order_count != 1 else ''} so far.":^30}"""
     )
     print(f"{'Thank you for your purchase!':^30}")
     print("=" * 30)
