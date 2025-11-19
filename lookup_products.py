@@ -1,4 +1,7 @@
-PRODUCTS_FILE = "products.csv"
+import os
+
+# Load from the environment variable or just use products.csv if it's not found
+PRODUCTS_FILE = os.getenv("PRODUCTS_FILE") or "products.csv"
 
 
 def lookup_products(barcode: str) -> list[list[str | float]]:

@@ -1,4 +1,11 @@
 import sys
+
+# Package used to manage environment variables
+from dotenv import load_dotenv
+
+# Loads the environment variables that specify file paths
+load_dotenv(".env")
+
 from Common.qarm_interface_wrapper import BarcodeScanner
 from lookup_products import lookup_products
 from pack_products import pack_products, arm

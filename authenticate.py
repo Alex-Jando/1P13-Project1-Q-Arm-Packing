@@ -3,7 +3,8 @@ import os
 import bcrypt
 import getpass
 
-USER_FILE = "users.csv"
+# Load from the environment variable or just use users.csv if it's not found
+USER_FILE = os.getenv("USER_FILE") or "users.csv"
 
 
 def authenticate() -> str:

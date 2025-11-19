@@ -1,7 +1,8 @@
 import os
 import random
 
-ORDERS_FILE = "orders.csv"
+# Load from the environment variable or just use orders.csv if it's not found
+ORDERS_FILE = os.getenv("ORDERS_FILE") or "orders.csv"
 TAX = 0.13
 
 

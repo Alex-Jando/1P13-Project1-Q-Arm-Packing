@@ -1,6 +1,7 @@
 import os
 
-ORDERS_FILE = "orders.csv"
+# Load from the environment variable or just use orders.csv if it's not found
+ORDERS_FILE = os.getenv("ORDERS_FILE") or "orders.csv"
 
 
 def customer_summary(userid: str):
