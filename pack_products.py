@@ -6,6 +6,11 @@ arm = QArmInterface(GRIPPER_IMPLEMENTATION)
 
 
 def drop(gripper_extension: float):
+    """Drops the product into the delivery bin
+
+    Args:
+        gripper_extension (float): The amount the gripper needs to open
+    """
     sleep(1)
     arm.home()
     sleep(1)
@@ -22,6 +27,7 @@ def drop(gripper_extension: float):
 
 
 def sponge():
+    """Picks up the Sponge product"""
     sleep(1)
     arm.home()
     sleep(1)
@@ -41,6 +47,7 @@ def sponge():
 
 
 def bottle():
+    """Picks up the Bottle product"""
     sleep(1)
     arm.home()
     sleep(1)
@@ -60,6 +67,7 @@ def bottle():
 
 
 def rook():
+    """Picks up the Rook product"""
     sleep(1)
     arm.home()
     sleep(1)
@@ -83,6 +91,7 @@ def rook():
 
 
 def d12():
+    """Picks up the D12 product"""
     sleep(1)
     arm.home()
     sleep(1)
@@ -106,6 +115,7 @@ def d12():
 
 
 def witch_hat():
+    """Picks up the Witch Hat product"""
     sleep(1)
     arm.home()
     sleep(1)
@@ -128,10 +138,8 @@ def witch_hat():
     drop(1200)
 
 
-# arm.rotate_gripper(1200)
-
-
 def bowl():
+    """Picks up the Bowl product"""
     sleep(1)
     arm.home()
     sleep(1)
@@ -159,7 +167,6 @@ def pack_products(products: list[list[str | float]]):
 
     for product in products:
         name = product[0]
-        # have a function for each product movement
         if name == "Sponge":
             # Do Q-Arm movement to grab sponge item
 
@@ -191,6 +198,7 @@ def pack_products(products: list[list[str | float]]):
             bowl()
 
         else:
+            # If the product name isn't one of the valid products print error message
             print(f"ERROR: product {name} not a packable product.")
             continue
 

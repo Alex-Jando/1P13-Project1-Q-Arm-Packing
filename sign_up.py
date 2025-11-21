@@ -94,6 +94,7 @@ def sign_up():
         print("4. At least one uppercase letter")
         print("5. At least one number")
         # Prompt the user to create a new password and confirm it
+        # Use The getpass function to hide what the user is typing for security
         new_password = getpass.getpass("Enter your new password: ").strip()
         new_password_confirm = getpass.getpass("Confirm your new password: ").strip()
         # Ensure the passwords match

@@ -33,6 +33,7 @@ def authenticate() -> str:
     while True:
         # Get the userid and password
         attempt_userid = input("Enter your user id: ").strip()
+        # Use The getpass function to hide what the user is typing for security
         attempt_password = getpass.getpass("Enter your password: ").strip()
 
         # Open the USER_FILE database

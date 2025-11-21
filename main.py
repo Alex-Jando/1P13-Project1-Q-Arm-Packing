@@ -3,7 +3,10 @@ import sys
 sys.path.append("../")
 
 # Package used to manage environment variables
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    print('WARNING: Please install the "dotenv" module to use environment variables.')
 
 # Loads the environment variables that specify file paths
 load_dotenv(".env")
@@ -64,6 +67,7 @@ def main():
 # Common check to only run the full program if the main file is run directly
 if __name__ == "__main__":
     try:
+        # Calibrate the Q-Arm gripper to open at 1200 degrees
         arm.rotate_gripper(1200)
         # Run the main function
         main()
