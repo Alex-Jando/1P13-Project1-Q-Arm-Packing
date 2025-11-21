@@ -64,6 +64,7 @@ def main():
 # Common check to only run the full program if the main file is run directly
 if __name__ == "__main__":
     try:
+        arm.rotate_gripper(1200)
         # Run the main function
         main()
     except KeyboardInterrupt:

@@ -9,9 +9,11 @@ def drop(gripper_extension: float):
     sleep(1)
     arm.home()
     sleep(1)
-    arm.rotate_base(-55)
+    arm.rotate_base(-50)
     sleep(1)
     arm.rotate_elbow(25)
+    sleep(1)
+    arm.rotate_shoulder(-15)
     sleep(1)
     arm.rotate_gripper(gripper_extension)
     sleep(1)
@@ -23,11 +25,11 @@ def sponge():
     sleep(1)
     arm.home()
     sleep(1)
-    arm.rotate_base(17)
+    arm.rotate_base(19)
     sleep(1)
     arm.rotate_shoulder(40)
     sleep(1)
-    arm.rotate_elbow(-7)
+    arm.rotate_elbow(-9)
     sleep(1)
     arm.rotate_gripper(-600)
     sleep(1)
@@ -42,11 +44,57 @@ def bottle():
     sleep(1)
     arm.home()
     sleep(1)
-    arm.rotate_base(11)
+    arm.rotate_base(12)
     sleep(1)
-    arm.rotate_shoulder(41)
+    arm.rotate_shoulder(42)
     sleep(1)
-    arm.rotate_elbow(-7)
+    arm.rotate_elbow(-10)
+    sleep(1)
+    arm.rotate_gripper(-650)
+    sleep(1)
+    arm.rotate_shoulder(-30)
+    sleep(1)
+    arm.home()
+    sleep(1)
+    drop(650)
+
+
+def rook():
+    sleep(1)
+    arm.home()
+    sleep(1)
+    arm.rotate_gripper(-100)
+    sleep(1)
+    arm.rotate_base(5)
+    sleep(1)
+    arm.rotate_shoulder(40)
+    sleep(1)
+    arm.rotate_elbow(-10)
+    sleep(1)
+    arm.rotate_shoulder(5)
+    sleep(1)
+    arm.rotate_gripper(-900)
+    sleep(1)
+    arm.rotate_shoulder(-30)
+    sleep(1)
+    arm.home()
+    sleep(1)
+    drop(1000)
+
+
+def d12():
+    sleep(1)
+    arm.home()
+    sleep(1)
+    arm.rotate_gripper(-100)
+    sleep(1)
+    arm.rotate_base(-2)
+    sleep(1)
+    arm.rotate_shoulder(40)
+    sleep(1)
+    arm.rotate_elbow(-12)
+    sleep(1)
+    arm.rotate_shoulder(7)
     sleep(1)
     arm.rotate_gripper(-600)
     sleep(1)
@@ -54,7 +102,52 @@ def bottle():
     sleep(1)
     arm.home()
     sleep(1)
-    drop(600)
+    drop(700)
+
+
+def witch_hat():
+    sleep(1)
+    arm.home()
+    sleep(1)
+    arm.rotate_gripper(-300)
+    sleep(1)
+    arm.rotate_base(-9)
+    sleep(1)
+    arm.rotate_shoulder(40)
+    sleep(1)
+    arm.rotate_elbow(-13)
+    sleep(1)
+    arm.rotate_shoulder(7)
+    sleep(1)
+    arm.rotate_gripper(-900)
+    sleep(1)
+    arm.rotate_shoulder(-30)
+    sleep(1)
+    arm.home()
+    sleep(1)
+    drop(1200)
+
+
+# arm.rotate_gripper(1200)
+
+
+def bowl():
+    sleep(1)
+    arm.home()
+    sleep(1)
+    arm.rotate_base(-14)
+    sleep(1)
+    arm.rotate_shoulder(41)
+    sleep(1)
+    arm.rotate_elbow(-17)
+    sleep(1)
+    arm.rotate_shoulder(8)
+    sleep(1)
+    arm.rotate_gripper(-1000)
+    sleep(1)
+    arm.rotate_shoulder(-30)
+    sleep(1)
+    drop(1000)
 
 
 def pack_products(products: list[list[str | float]]):
@@ -80,22 +173,22 @@ def pack_products(products: list[list[str | float]]):
         elif name == "Rook":
             # Do Q-Arm movement to grab rook item
 
-            pass
+            rook()
 
         elif name == "D12":
             # Do Q-Arm movement to grab d12 item
 
-            pass
+            d12()
 
         elif name == "WitchHat":
             # Do Q-Arm movement to grab witch hat item
 
-            pass
+            witch_hat()
 
         elif name == "Bowl":
             # Do Q-Arm movement to grab bowl item
 
-            pass
+            bowl()
 
         else:
             print(f"ERROR: product {name} not a packable product.")
