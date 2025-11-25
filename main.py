@@ -5,11 +5,11 @@ sys.path.append("../")
 # Package used to manage environment variables
 try:
     from dotenv import load_dotenv
+
+    # Loads the environment variables that specify file paths
+    load_dotenv(".env")
 except ModuleNotFoundError:
     print('WARNING: Please install the "dotenv" module to use environment variables.')
-
-# Loads the environment variables that specify file paths
-load_dotenv(".env")
 
 from Common.qarm_interface_wrapper import BarcodeScanner
 from lookup_products import lookup_products
