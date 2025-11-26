@@ -17,3 +17,23 @@ For Engineering 1P13 Project 1, our team designed a custom end-effector attachme
 - **Product Database Integration:** The software checks product information and pricing from a dedicated database to determine the correct items to pack.
 - **Order Management:** All orders are stored in a database for tracking, auditing, and future reference.
 - **Automated Output:** The system generates detailed order receipts and summaries based on the submitted order data.
+
+## Mechanism Pictures
+
+To load the full model assembly in AutoDesk Inventor open the model/FullAssembly.iam file
+
+### Isometric View
+
+![Isometric View](res/isometric_view.png "Isometric View")
+
+### Front View
+
+![Front View](res/front_view.png "Front View")
+
+### Top View
+
+![Top View](res/top_view.png "Top View")
+
+### Right View
+
+![Right View](res/right_view.png "Right View")
